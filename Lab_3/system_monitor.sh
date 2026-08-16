@@ -14,9 +14,9 @@ LOG_FILE="${PROJECT_DIR}/system_monitor.log"
 ALERT_FILE="${PROJECT_DIR}/alerts.log"
 DATE=$(date +"%Y-%m-%d %H:%M:%S")
 
-CPU_THRESHOLD=80
-MEM_THRESHOLD=80
-DISK_THRESHOLD=85
+CPU_THRESHOLD=1
+MEM_THRESHOLD=1
+DISK_THRESHOLD=1
 CRITICAL_SERVICES=("cron")  
 
 touch "$LOG_FILE" "$ALERT_FILE"
@@ -32,7 +32,7 @@ send_alert() {
 }
 
 echo "[$DATE] Starting system health check..." >> "$LOG_FILE"
-echo "[$DATE] " >> "$ALERT_FILE"
+echo "[$DATE] CHECKING FOR ALERTS " >> "$ALERT_FILE"
 
 DISK_USAGE=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$DISK_USAGE" -gt "$DISK_THRESHOLD" ]; then
