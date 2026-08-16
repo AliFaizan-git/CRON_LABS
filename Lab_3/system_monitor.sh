@@ -32,6 +32,7 @@ send_alert() {
 }
 
 echo "[$DATE] Starting system health check..." >> "$LOG_FILE"
+echo "[$DATE] " >> "$ALERT_FILE"
 
 DISK_USAGE=$(df -h / | awk 'NR==2 {print $5}' | sed 's/%//')
 if [ "$DISK_USAGE" -gt "$DISK_THRESHOLD" ]; then
